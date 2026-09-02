@@ -36,7 +36,7 @@ export default function Home() {
     await supabase.auth.signOut()
     setUser(null)
     router.refresh()
-    alert(lang === 'cs' ? 'Odhlášení proběhło úspěšně' : lang === 'en' ? 'Successfully logged out' : 'Sesión cerrada con éxito')
+    alert(lang === 'cs' ? 'Odhlášení proběhlo úspěšně' : lang === 'en' ? 'Successfully logged out' : 'Sesión cerrada con éxito')
   }
 
   async function fetchProperties() {
@@ -119,64 +119,70 @@ export default function Home() {
       </header>
 
       {/* Hero y Filtros */}
-      <div className="relative w-full py-16 px-4 text-white overflow-hidden">
-        <Image
-  src="/images/hero-praga.jpeg"
-  alt="Praga inmobiliaria"
-  fill
-  className="object-cover -z-10 brightness-75"
-/>
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-black mb-3">{t.subtitle}</h1>
-          <p className="text-blue-200 text-lg mb-8">{t.searchDesc}</p>
+<div className="relative w-full py-24 px-4 text-white overflow-hidden">
+  {/* Imagen de fondo con opacidad directa */}
+  <Image
+    src="/images/hero-praga.jpeg"
+    alt="Praga inmobiliaria"
+    fill
+    loading="eager"
+    className="object-cover absolute inset-0 brightness-90"
+  />
+  
+  {/* Capa oscura semitransparente para dar contraste */}
+  <div className="absolute inset-0 bg-black/40" />
 
-          <div className="bg-white p-6 rounded-3xl shadow-xl text-gray-800 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
-            <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t.operation}</label>
-              <select
-                value={operationType}
-                onChange={(e) => setOperationType(e.target.value)}
-                className="w-full bg-gray-50 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="Todos">{t.allOperations}</option>
-                <option value="Alquiler">{lang === 'cs' ? 'Pronájem' : t.rent}</option>
-                <option value="Venta">{lang === 'cs' ? 'Prodej' : t.sale}</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t.city}</label>
-              <select
-                value={cityFilter}
-                onChange={(e) => setCityFilter(e.target.value)}
-                className="w-full bg-gray-50 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="Todas">{t.allCities}</option>
-                {uniqueCities.filter(c => c !== 'Todas').map((city, index) => (
-                  <option key={index} value={city}>{city}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-xs font-bold uppercase text-gray-500 mb-1">{t.disposition}</label>
-              <select
-                value={dispositionFilter}
-                onChange={(e) => setDispositionFilter(e.target.value)}
-                className="w-full bg-gray-50 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                <option value="Todas">{t.allDispositions}</option>
-                {uniqueDispositions.filter(d => d !== 'Todas').map((disp, index) => (
-                  <option key={index} value={disp}>{disp}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </div>
+  <div className="relative z-10 max-w-5xl mx-auto text-center">
+    <h1 className="text-4xl md:text-5xl font-black mb-3 text-white drop-shadow-lg">{t.subtitle}</h1>
+    <p className="text-gray-100 text-lg mb-8 drop-shadow-md">{t.searchDesc}</p>
+    
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-left bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20">
+      <div>
+        <label className="block text-xs font-bold uppercase text-gray-200 mb-1">{t.operation}</label>
+        <select
+          value={operationType}
+          onChange={(e) => setOperationType(e.target.value)}
+          className="w-full bg-white text-gray-800 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Todos">{t.allOperations}</option>
+          <option value="Alquiler">{lang === 'cs' ? 'Pronájem' : t.rent}</option>
+          <option value="Venta">{lang === 'cs' ? 'Prodej' : t.sale}</option>
+        </select>
       </div>
 
+      <div>
+        <label className="block text-xs font-bold uppercase text-gray-200 mb-1">{t.city}</label>
+        <select
+          value={cityFilter}
+          onChange={(e) => setCityFilter(e.target.value)}
+          className="w-full bg-white text-gray-800 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Todas">{t.allCities}</option>
+          {uniqueCities.filter(c => c !== 'Todas').map((city, index) => (
+            <option key={index} value={city}>{city}</option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label className="block text-xs font-bold uppercase text-gray-200 mb-1">{t.disposition}</label>
+        <select
+          value={dispositionFilter}
+          onChange={(e) => setDispositionFilter(e.target.value)}
+          className="w-full bg-white text-gray-800 border rounded-xl p-3 text-sm font-semibold outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="Todas">{t.allDispositions}</option>
+          {uniqueDispositions.filter(d => d !== 'Todas').map((disp, index) => (
+            <option key={index} value={disp}>{disp}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
       {/* Listado */}
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 mt-10">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-gray-800">
             {t.availableProperties} <span className="text-sm font-normal text-gray-500">({filteredProperties.length})</span>
