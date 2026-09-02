@@ -71,7 +71,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-black text-blue-600 tracking-tight flex items-center gap-2">
             <span>{t.title}</span>
-            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-semibold">ReCz</span>
+            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full font-semibold">CzRe</span>
           </Link>
 
           <div className="flex items-center gap-3">
