@@ -5,6 +5,7 @@ import { supabase } from '@/app/lib/supabase'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { dictionary } from '@/app/lib/dictionary'
+import Image from 'next/image';
 
 export default function Home() {
   const router = useRouter()
@@ -118,7 +119,13 @@ export default function Home() {
       </header>
 
       {/* Hero y Filtros */}
-      <div className="bg-gradient-to-br from-blue-900 to-indigo-900 text-white py-12 px-4 shadow-md mb-10">
+      <div className="relative w-full py-16 px-4 text-white overflow-hidden">
+        <Image
+  src="/images/hero-praga.jpeg"
+  alt="Praga inmobiliaria"
+  fill
+  className="object-cover -z-10 brightness-75"
+/>
         <div className="max-w-5xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-black mb-3">{t.subtitle}</h1>
           <p className="text-blue-200 text-lg mb-8">{t.searchDesc}</p>
